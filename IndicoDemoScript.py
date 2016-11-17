@@ -16,14 +16,14 @@ while(True):
     cv2.imshow('frame',frame)
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
-    highestProb=0
-    highestItem='thing'
-    print indicoio.image_recognition(frame)
+    highestProb=[0]
+    highestItem=['thing']
+    #print indicoio.image_recognition(frame)
     probDict= indicoio.image_recognition(frame) #returns a dictionary of 1000 "likely" items and the probability that it is the object...
     for item in probDict:
-    	if(probDict[item]>highestProb): #finding the most likely object on the screen
-    		highestProb=probDict[item]
-    		highestItem=item
+    	if(probDict[item]>highestProb[0]): #finding the most likely object on the screen
+    		highestProb[0]=probDict[item] #returning a list so that we know what the top 5 objects are
+    		highestItem[0]=item
     print highestProb
     print highestItem
 

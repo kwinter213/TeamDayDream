@@ -8,18 +8,17 @@ Project Daydream is a real-time program which detect specific objects and displa
 
 # Authors
 
-Kim Winter,Diego Garcia,Eric Liu,Chloe Grubb,Anderson Ang
-We are deciding on using Indico or OpenCV for the object detection library.
+Kim Winter, Diego Garcia, Eric Liu, Chloe Grubb, Anderson Ang
 
 # Getting Started
 
-Clone the repository (http://github.com/kwinter213/TeamDayDream.git) to download the program.
-Install the library that we use and get a webcam connected.
+Download the program using the link above
+Install the openCV library and attach a webcam
 
 # Usage
 
 To use the program just run the program script.
-The input is from the webcam and the output is the animation that are being displayed on the detected object.
+The input is from the webcam and the output is the animations that are being displayed on the detected object.
 
 # License
 
