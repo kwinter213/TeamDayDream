@@ -11,29 +11,28 @@
 
 ## What we hope to get out of the technical review:
 
--How to coordinate with a large team (10 minutes)
--Prioritization of stretch goals  (5-10 minutes)
--Indico vs. Open CV? (~5-7 minutes)
+- How to coordinate with a large team (10 minutes)
+- Prioritization of stretch goals  (5-10 minutes)
+- Indico vs. Open CV? (~5-7 minutes)
 
 ## Format:
--Technical Discussion
--High level architecture discussion
+- Technical Discussion
+- High level architecture discussion
 
 ## Tasks before then:
--Indico vs. OpenCV background info (done by Sunday! :) )
---Diego (starting)
---Update:
----Kimber
----Anderson
--Create a better chart/graph thing
---Chloe
---https://www.smartdraw.com/activity-diagram/ 
+- Indico vs. OpenCV background info (done by Sunday! :) )
+-- Diego (starting)
+-- Update:
+--- Kimber
+--- Anderson
+- Create a better chart/graph thing
+-- Chloe
+-- https://www.smartdraw.com/activity-diagram/ 
 
 
--Object Recognition demo for OpenCV
---Anderson
--Object recognition demo for Indico
---Kimber
--Update the Readme Markdown/Upload Initial Technical Review in the github
---Qingyun
-
+- Object Recognition demo for OpenCV
+-- Anderson
+- Object recognition demo for Indico
+-- Kimber
+- Update the Readme Markdown/Upload Initial Technical Review in the github
+-- Qingyun
