@@ -25,12 +25,12 @@ while(True):
 
  
 	# ensure that the approximated contour is "roughly" rectangular
-	if len(approx) >= 4 and len(approx) <= 9:
+	if len(approx) >= 4 and len(approx) <= 6:
 		status = "Found possible object"
 		# compute the bounding box of the approximated contour and
 		# use the bounding box to compute the aspect ratio
 		(x, y, w, h) = cv2.boundingRect(approx)
-		aspectRatio = w / float(h)
+		aspectRatio = float(h) / w
  
 		# compute the solidity of the original contour
 		area = cv2.contourArea(c)
@@ -39,7 +39,7 @@ while(True):
  
 		# compute whether or not the width and height, solidity, and
 		# aspect ratio of the contour falls within appropriate bounds
-		keepDims = w > 30 and h > 60
+		keepDims = w > 60 and h > 30
 		keepSolidity = solidity > 0.9
 		keepAspectRatio = aspectRatio >= 0.8 and aspectRatio <= 1.4
  
