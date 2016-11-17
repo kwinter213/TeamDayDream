@@ -27,7 +27,7 @@
  - Trello/project management platform 
 
 
-## Post-review discoveries
+### Post-review discoveries
 
 
 - Other APIs
@@ -43,7 +43,7 @@
 
 ## Process reflection
 
-- Overall, we were able to communicate the intents and objectives of the project to the audience.
+Overall, we were able to communicate the intents and objectives of the project to the audience.
 - We were also really proud that we had functionality prior to the technical review and were able to live-demo.
 - We got feedback for our key questions, but they were not necessarily as in-depth as we would have liked.
  - One potential cause for this problem is that our questions were not open-ended enough
