@@ -1,7 +1,7 @@
 # Project Daydream
 # Technical Review 2
 
-![alt tag](https://raw.githubusercontent.com/kwinter213/TeamDayDream/master/images/SDUML.png)
+![alt tag](https://raw.githubusercontent.com/kwinter213/TeamDayDream/master/images/giphygreenface.png)
 
 ## Preparation and Framing
 
