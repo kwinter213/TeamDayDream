@@ -30,6 +30,7 @@ while(True):
 		# compute the bounding box of the approximated contour and
 		# use the bounding box to compute the aspect ratio
 		(x, y, w, h) = cv2.boundingRect(approx)
+
 		aspectRatio = float(h) / w
  
 		# compute the solidity of the original contour
