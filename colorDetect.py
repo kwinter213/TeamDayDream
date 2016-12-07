@@ -5,12 +5,12 @@
 import cv2
 import numpy
 
-
+#255, 144, 33
 #color needs calibration, but yeah...
-redLower=numpy.array([17, 15, 50], dtype="uint8") #uint8 necessary for this kind of thing 
-redUpper=numpy.array([50, 75, 255], dtype= "uint8") #represents upper and lower bounds of the color "red"
+orangeLower=numpy.array([5, 50, 150], dtype="uint8") #uint8 necessary for this kind of thing 
+orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "red"
 
-image=cv2.imread("colors.jpg") #image example
+image=cv2.imread("trafficCone.jpg") #image example
 mask=cv2.inRange(image, redLower,redUpper) #creates mask of all the red pixels
 output=cv2.bitwise_and(image,image,mask=mask) #maps mask onto image
 
