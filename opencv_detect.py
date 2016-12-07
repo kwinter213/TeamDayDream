@@ -12,7 +12,7 @@ while(True):
     gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
     blurred = cv2.GaussianBlur(gray, (7, 7), 0)
     edged = cv2.Canny(blurred, 50, 150)
- 
+
     # find contours in the edge map
     (cnts, _) = cv2.findContours(edged.copy(), cv2.RETR_EXTERNAL,
 	cv2.CHAIN_APPROX_SIMPLE)
@@ -23,7 +23,7 @@ while(True):
 	peri = cv2.arcLength(c, True)
 	approx = cv2.approxPolyDP(c, 0.01 * peri, True)
 
- 
+
 	# ensure that the approximated contour is "roughly" rectangular
 	if len(approx) >= 4 and len(approx) <= 6:
 		status = "Found possible object"
@@ -32,25 +32,25 @@ while(True):
 		(x, y, w, h) = cv2.boundingRect(approx)
 
 		aspectRatio = float(h) / w
- 
+
 		# compute the solidity of the original contour
 		area = cv2.contourArea(c)
 		hullArea = cv2.contourArea(cv2.convexHull(c))
 		solidity = area / float(hullArea)
- 
+
 		# compute whether or not the width and height, solidity, and
 		# aspect ratio of the contour falls within appropriate bounds
 		keepDims = w > 60 and h > 30
 		keepSolidity = solidity > 0.9
 		keepAspectRatio = aspectRatio >= 0.8 and aspectRatio <= 1.4
- 
+
 		# ensure that the contour passes all our tests
 		if keepDims and keepSolidity and keepAspectRatio:
 			# draw an outline around the target and update the status
 			# text
 			cv2.drawContours(frame, [approx], -1, (0, 0, 255), 6)
 			status = "Target(s) Acquired"
- 
+
 			# compute the center of the contour region and draw the
 			# crosshairs
 			M = cv2.moments(approx)
