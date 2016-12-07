@@ -11,7 +11,7 @@ orangeLower=numpy.array([5, 50, 150], dtype="uint8") #uint8 necessary for this k
 orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "red"
 
 image=cv2.imread("trafficCone.jpg") #image example
-mask=cv2.inRange(image, redLower,redUpper) #creates mask of all the red pixels
+mask=cv2.inRange(image, orangeLower,orangeUpper) #creates mask of all the red pixels
 output=cv2.bitwise_and(image,image,mask=mask) #maps mask onto image
 
 

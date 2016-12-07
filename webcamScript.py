@@ -15,16 +15,19 @@ while(True):
     mask=cv2.inRange(frame, orangeLower,orangeUpper) #creates mask of all the red pixels
     output=cv2.bitwise_and(frame,frame,mask=mask) #maps mask onto image
 
+    output = cv2.cvtColor(output, cv2.COLOR_BGR2HSV)
+    output = cv2.erode(output, None, iterations=2)
+    output = cv2.dilate(output, None, iterations=2)
 
-    cv2.imshow('Colors', output) #filtered out thing
-#  for row in output:
- #       for column in output[row]:
-  #          if output[row,column]!=[0, 0, 0]:
-   #             print "Pencil detected!"
 
-    print output[0,0]
-    time.sleep(1)
-    print "Hi"
+###Detection part
+    cv2.imshow('Colors', output) #display filtered out thing
+    for row in output:
+        for pixel in row:
+            if pixel is not [0,0,0]:
+               #print "detected!"
+               pass
+
     # Display the resulting frame
     if cv2.waitKey(1) & 0xFF == ord('q'):
         break
