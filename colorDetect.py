@@ -1,4 +1,4 @@
-##Kimberly Winter
+#Kimberly Winter
 #detects a specific color
 #to be integrated into object recognition
 
@@ -7,7 +7,7 @@ import numpy
 
 #255, 144, 33
 #color needs calibration, but yeah...
-orangeLower=numpy.array([5, 50, 150], dtype="uint8") #uint8 necessary for this kind of thing 
+orangeLower=numpy.array([5, 50, 150], dtype="uint8") #uint8 necessary for this kind of thing
 orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "red"
 
 image=cv2.imread("trafficCone.jpg") #image example

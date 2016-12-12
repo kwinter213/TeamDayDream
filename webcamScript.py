@@ -3,13 +3,13 @@ import cv2
 import numpy
 import time
 
-cap = cv2.VideoCapture(1)
+cap = cv2.VideoCapture(0)
 
 while(True):
     # Capture frame-by-frame
     ret, frame = cap.read() #gets the frame
     orangeLower=numpy.array([5, 50, 150], dtype="uint8") #uint8 necessary for this kind of thing 
-    orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "red"
+    orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "orange"
 
     mask=cv2.inRange(frame, orangeLower,orangeUpper) #creates mask of all the red pixels
     output=cv2.bitwise_and(frame,frame,mask=mask) #maps mask onto image
@@ -27,18 +27,8 @@ while(True):
 
     # find contours in the edge map
     contours, hierarchy= cv2.findContours(edged,cv2.RETR_EXTERNAL,cv2.CHAIN_APPROX_SIMPLE)
-    print len(contours[0])
-
-    cnt = contours[0]
-
-
-    #ctr = numpy.array(contours).reshape((-1,1,2)).astype(numpy.int32)
-    #print len(ctr)
-    #print type(ctr)
-    #imgray=array2cv(cv2.cvtColor(cv2array(output), cv.CV_RGB2GRAY))
-    #storage=cv.CreateMemStorage(0)
+    #drawing said contours
     cv2.drawContours(output, contours, -1, (255,0,0),-1)
-
 
 ###Detection part
     cv2.imshow('Colors', output) #display filtered out thing
