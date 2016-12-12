@@ -2,10 +2,14 @@
 # Anderson
 # Softdes Final Project
 
+## Post notes - able to select corners, but formation of a bounding box is
+## difficult due to polylines
+## It is also not possible to identify objects by their edge signatures
+
 import cv2
 import numpy as np
 
-filename = 'sample1.jpg'
+filename = 'sample2.jpg'
 img = cv2.imread(filename)
 # creates grey image
 gray = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY)
