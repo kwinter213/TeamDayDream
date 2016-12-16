@@ -21,7 +21,7 @@ overlay_starttime = 0
 overlay_playing = False
 stableTime=50 #iterations before average is taken-- used for stabilization
 
-orangeLower=numpy.array([5, 50, 150]) 
+orangeLower=numpy.array([5, 50, 150])
 orangeUpper=numpy.array([100, 200, 255]) #represents upper and lower bounds of the color "orange"
 orangeCount=0 #used for cueing which set of images to use
 
@@ -29,11 +29,19 @@ greenLower=numpy.array([0,87, 39])
 greenUpper=numpy.array([198,187, 139])
 greenCount=1
 
+blueLower=numpy.array([107,45,9])
+blueUpper=numpy.array([207,145,109])
+blueCount=2
+
+redLower=numpy.array([0,0,67])
+redUpper=numpy.array([72,84,167])
+redCount=3
+
 blackUpper=numpy.array([50, 50, 50])
 blackLower=numpy.array([0,0,0]) #black
 blackCount=4
 
-colors=([orangeLower,orangeUpper,orangeCount],[greenLower,greenUpper,greenCount], [blackLower,blackUpper, blackCount])
+colors=([orangeLower,orangeUpper,orangeCount],[greenLower,greenUpper,greenCount], [blueLower,blueUpper,blueCount],[redLower,redUpper,redCount], [blackLower,blackUpper, blackCount])
 
 def loadOverlayVideo(col):
     """
@@ -41,11 +49,23 @@ def loadOverlayVideo(col):
     """
     global video_overlay
     video_overlay = []
-    if(col[2]==0):
+    if(col[2]==0):#orange is priority
         for i in range(NUM_FRAMES):
             # load 4-channel png image
             video_overlay.append(cv2.imread('video_1/ani-' + str(i) + '.png', cv2.IMREAD_UNCHANGED))
-    elif(col[2]==1):
+    elif(col[2]==1): #then green
+        for i in range(NUM_FRAMES):
+        # load 4-channel png image
+            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+    elif(col[2]==2): #then blue
+        for i in range(NUM_FRAMES):
+        # load 4-channel png image
+            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+    elif(col[2]==3): #then red
+        for i in range(NUM_FRAMES):
+        # load 4-channel png image
+            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+    elif(col[2]==4): #finally black
         for i in range(NUM_FRAMES):
         # load 4-channel png image
             video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
