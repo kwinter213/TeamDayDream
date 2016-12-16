@@ -21,7 +21,7 @@ overlay_starttime = 0
 overlay_playing = False
 stableTime=50 #iterations before average is taken-- used for stabilization
 
-blackUpper=numpy.array([25, 25, 25])
+blackUpper=numpy.array([50, 50, 50])
 blackLower=numpy.array([0,0,0]) #black
 #black=numpy.array([0,0,0],[50,50,50]) #defining black
 
@@ -123,10 +123,10 @@ while(True):
     ret, frame = cap.read() #gets the frame
     #orangeLower=numpy.array([5, 50, 150], dtype="uint8") #uint8 necessary for this kind of thing
     #orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "orange"
-    for c in colors: #iterating through each color
-        minx, maxx, miny, maxy, output=largeRectangle(frame, c)
+    for col in colors: #iterating through each color
+        minx, maxx, miny, maxy, output=largeRectangle(frame, col)
         #if a contour of the right color is detected...
-        if(isinstance(minx, int)):
+        if(isinstance(minx, int) and maxx-minx>20):
             if count<stableTime:
                 minxsum+=minx
                 minysum+=miny
@@ -154,7 +154,8 @@ while(True):
                 print [centre_x, centre_y]
                 playoverlay(centre_x - overlay_w / 2, centre_y - overlay_h / 2)
 
-                print c
+                print col
+                break #so it doesn't cycle through all colors
             #rect = cv2.minAreaRect(contours)
             #box = cv2.boxPoints(rect)
             #box = np.int0(box)
