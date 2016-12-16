@@ -21,24 +21,34 @@ overlay_starttime = 0
 overlay_playing = False
 stableTime=50 #iterations before average is taken-- used for stabilization
 
-blackUpper=numpy.array([50, 50, 50])
-blackLower=numpy.array([0,0,0]) #black
-#black=numpy.array([0,0,0],[50,50,50]) #defining black
-
 orangeLower=numpy.array([5, 50, 150]) 
 orangeUpper=numpy.array([100, 200, 255]) #represents upper and lower bounds of the color "orange"
+orangeCount=0 #used for cueing which set of images to use
 
-colors=([orangeLower,orangeUpper],[blackLower,blackUpper])
+greenLower=numpy.array([0,87, 39])
+greenUpper=numpy.array([198,187, 139])
+greenCount=1
 
-def loadOverlayVideo():
+blackUpper=numpy.array([50, 50, 50])
+blackLower=numpy.array([0,0,0]) #black
+blackCount=4
+
+colors=([orangeLower,orangeUpper,orangeCount],[greenLower,greenUpper,greenCount], [blackLower,blackUpper, blackCount])
+
+def loadOverlayVideo(col):
     """
     Load and generate overlay video, It's just for demo
     """
     global video_overlay
     video_overlay = []
-    for i in range(NUM_FRAMES):
+    if(col[2]==0):
+        for i in range(NUM_FRAMES):
+            # load 4-channel png image
+            video_overlay.append(cv2.imread('video_1/ani-' + str(i) + '.png', cv2.IMREAD_UNCHANGED))
+    elif(col[2]==1):
+        for i in range(NUM_FRAMES):
         # load 4-channel png image
-        video_overlay.append(cv2.imread('video_1/ani-' + str(i) + '.png', cv2.IMREAD_UNCHANGED))
+            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
 
 def playoverlay(x, y):
     global overlay_playing, overlay_starttime, overlay_x, overlay_y
@@ -102,7 +112,6 @@ cap = cv2.VideoCapture(0)
 cv2.namedWindow('cameraview')
 
 
-loadOverlayVideo()
 
 #in order to take the average of the largest rectangle formed by the black mask/object
 count=0
@@ -127,6 +136,7 @@ while(True):
         minx, maxx, miny, maxy, output=largeRectangle(frame, col)
         #if a contour of the right color is detected...
         if(isinstance(minx, int) and maxx-minx>20):
+            loadOverlayVideo(col)
             if count<stableTime:
                 minxsum+=minx
                 minysum+=miny
