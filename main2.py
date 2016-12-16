@@ -15,8 +15,8 @@ fc_overlay = 0  # frame count of overlay video
 video_overlay=[]
 overlay_x = 0
 overlay_y = 0
-overlay_w = 64
-overlay_h = 64
+overlay_w = 850 #64
+overlay_h = 350 #64
 overlay_starttime = 0
 overlay_playing = False
 stableTime=50 #iterations before average is taken-- used for stabilization
@@ -50,25 +50,35 @@ def loadOverlayVideo(col):
     global video_overlay
     video_overlay = []
     if(col[2]==0):#orange is priority
+        mode = 1
         for i in range(NUM_FRAMES):
             # load 4-channel png image
             video_overlay.append(cv2.imread('video_1/ani-' + str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        return mode
     elif(col[2]==1): #then green
+        mode = 1
         for i in range(NUM_FRAMES):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        return mode
     elif(col[2]==2): #then blue
+        mode = 1
         for i in range(NUM_FRAMES):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        return mode
     elif(col[2]==3): #then red
+        mode = 1
         for i in range(NUM_FRAMES):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        return mode
     elif(col[2]==4): #finally black
+        mode = 2
         for i in range(NUM_FRAMES):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        return mode
 
 def playoverlay(x, y):
     global overlay_playing, overlay_starttime, overlay_x, overlay_y
@@ -156,7 +166,13 @@ while(True):
         minx, maxx, miny, maxy, output=largeRectangle(frame, col)
         #if a contour of the right color is detected...
         if(isinstance(minx, int) and maxx-minx>20):
-            loadOverlayVideo(col)
+            mode_select = loadOverlayVideo(col)
+            """if mode_select == 2:
+                overlay_w = 40
+                overlay_h = 30
+            else:
+                overlay_w = 64
+                overlay_h = 64"""
             if count<stableTime:
                 minxsum+=minx
                 minysum+=miny
