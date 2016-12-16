@@ -13,7 +13,8 @@ Kim Winter, Diego Garcia, Eric Liu, Chloe Grubb, Anderson Ang
 # Getting Started
 
 Download the program using the link above
-Install the openCV library and attach a webcam
+Install the openCV library and attach a webcam.
+Run the main2.py file and place objects in view of the camera feed for the animations to play.
 
 # Usage
 
