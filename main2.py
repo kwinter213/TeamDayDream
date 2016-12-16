@@ -21,15 +21,14 @@ overlay_starttime = 0
 overlay_playing = False
 stableTime=50 #iterations before average is taken-- used for stabilization
 
-blackUpper=numpy.array([50, 50, 50])
+blackUpper=numpy.array([25, 25, 25])
 blackLower=numpy.array([0,0,0]) #black
 #black=numpy.array([0,0,0],[50,50,50]) #defining black
 
 orangeLower=numpy.array([5, 50, 150]) 
 orangeUpper=numpy.array([100, 200, 255]) #represents upper and lower bounds of the color "orange"
 
-colors=([blackLower,blackUpper],[orangeLower,orangeUpper])
-print colors[0][0]
+colors=([orangeLower,orangeUpper],[blackLower,blackUpper])
 
 def loadOverlayVideo():
     """
@@ -126,7 +125,8 @@ while(True):
     #orangeUpper=numpy.array([100, 200, 255], dtype= "uint8") #represents upper and lower bounds of the color "orange"
     for c in colors: #iterating through each color
         minx, maxx, miny, maxy, output=largeRectangle(frame, c)
-        if(isinstance( <minx, int ))
+        #if a contour of the right color is detected...
+        if(isinstance(minx, int)):
             if count<stableTime:
                 minxsum+=minx
                 minysum+=miny
@@ -153,6 +153,8 @@ while(True):
                 centre_y = (maxyAverage + minyAverage)/2.0
                 print [centre_x, centre_y]
                 playoverlay(centre_x - overlay_w / 2, centre_y - overlay_h / 2)
+
+                print c
             #rect = cv2.minAreaRect(contours)
             #box = cv2.boxPoints(rect)
             #box = np.int0(box)
