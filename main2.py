@@ -9,14 +9,14 @@ import numpy
 import time
 
 MAXFRAMES=60    # max number of frames (length of animation)
-NUM_FRAMES=24   # number of animation frames
-OVERLAYFRAMERATE = 12
+NUM_FRAMES=36   # number of animation frames
+OVERLAYFRAMERATE = 24
 fc_overlay = 0  # frame count of overlay video
 video_overlay=[]
 overlay_x = 0
 overlay_y = 0
-overlay_w = 850 #64
-overlay_h = 350 #64
+overlay_w = 639 #64
+overlay_h = 479 #64
 overlay_starttime = 0
 overlay_playing = False
 stableTime=50 #iterations before average is taken-- used for stabilization
@@ -51,45 +51,48 @@ def loadOverlayVideo(col):
     video_overlay = []
     if(col[2]==0):#orange is priority
         mode = 1
-        for i in range(NUM_FRAMES):
+        for i in range(1,NUM_FRAMES+1):
             # load 4-channel png image
-            video_overlay.append(cv2.imread('video_1/ani-' + str(i) + '.png', cv2.IMREAD_UNCHANGED))
-        return mode
+            
+            video_overlay.append(cv2.imread('maybe/' +str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        #return mode
     elif(col[2]==1): #then green
         mode = 1
-        for i in range(NUM_FRAMES):
+        for i in range(1,NUM_FRAMES+1):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
-        return mode
+            video_overlay.append(cv2.imread('maybe/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        #return mode
     elif(col[2]==2): #then blue
         mode = 1
-        for i in range(NUM_FRAMES):
+        for i in range(1,NUM_FRAMES+1):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
-        return mode
+            video_overlay.append(cv2.imread('maybe/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        #return mode
     elif(col[2]==3): #then red
         mode = 1
-        for i in range(NUM_FRAMES):
+        for i in range(1,NUM_FRAMES+1):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
-        return mode
+            video_overlay.append(cv2.imread('maybe/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        #return mode
     elif(col[2]==4): #finally black
         mode = 2
-        for i in range(NUM_FRAMES):
+        for i in range(1,NUM_FRAMES+1):
         # load 4-channel png image
-            video_overlay.append(cv2.imread('video_1/ani-'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
-        return mode
+            video_overlay.append(cv2.imread('maybe/'+str(i) + '.png', cv2.IMREAD_UNCHANGED))
+        #return mode
 
 def playoverlay(x, y):
     global overlay_playing, overlay_starttime, overlay_x, overlay_y
     overlay_playing = True
     overlay_starttime = time.clock()
-    overlay_x = x
-    overlay_y = y
+    overlay_x = 400
+    overlay_y = 300
 
 
 def overlayFrame(frame):
     global overlay_playing
+    centre_x=0
+    centre_y=0 #centering the image
     # get frame number of overlay frame
     currTime = time.clock() - overlay_starttime
     if currTime > MAXFRAMES / OVERLAYFRAMERATE:
@@ -97,8 +100,9 @@ def overlayFrame(frame):
     frame_no = int(currTime * OVERLAYFRAMERATE) % NUM_FRAMES
     # composite overlay frame
     for c in range(0,3):
-        alpha = video_overlay[frame_no][:,:, 3] / 255.0
-        color = video_overlay[frame_no][:,:, c] * (alpha)
+        
+        alpha = video_overlay[frame_no][:,:,3] / 255.0
+        color = video_overlay[frame_no][:,:,c] * (alpha)
         beta  = frame[centre_y : centre_y + overlay_h, centre_x : centre_x + overlay_w, c] * (1.0 - alpha)
         frame[centre_y : centre_y + overlay_h, centre_x : centre_x + overlay_w, c] = color + beta
 
@@ -166,7 +170,7 @@ while(True):
         minx, maxx, miny, maxy, output=largeRectangle(frame, col)
         #if a contour of the right color is detected...
         if(isinstance(minx, int) and maxx-minx>20):
-            mode_select = loadOverlayVideo(col)
+            loadOverlayVideo(col)
             """if mode_select == 2:
                 overlay_w = 40
                 overlay_h = 30
@@ -201,15 +205,17 @@ while(True):
                 playoverlay(centre_x - overlay_w / 2, centre_y - overlay_h / 2)
 
                 print col
-                break #so it doesn't cycle through all colors
+            if overlay_playing:
+                overlayFrame(frame)
+            break #so it doesn't cycle through all colors
             #rect = cv2.minAreaRect(contours)
             #box = cv2.boxPoints(rect)
             #box = np.int0(box)
             #cv2.drawContours(img,[box],0,(0,0,255),2)
             #ret, frame = cap.read()
             # Display the resulting frame
-            if overlay_playing:
-                overlayFrame(frame)
+            #if overlay_playing:
+                #overlayFrame(frame)
 ###Detection part
 
 
